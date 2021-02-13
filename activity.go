@@ -50,7 +50,7 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 
 	var client *http.Client
 	var resp *http.Response
-	urlString := input.QueryInput
+	urlString := input.URL
 	url,err := url.Parse(urlString)
 	if err != nil {
 		return true, err
