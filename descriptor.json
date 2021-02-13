@@ -6,14 +6,12 @@
   "title": "FLOGO Analytics",
   "description": "FLOGO Analytics",
   "homepage": "https://github.com/subamkumar/Flogo_Analytics",
-  "settings": [
+  "input": [
     {
       "name": "URL",
       "type": "string",
       "required": true
-    }
-  ],
-  "input": [
+    },
     {
       "name": "queryInput",
       "type": "string",

@@ -1,6 +1,9 @@
 package sample
 
 import (
+	"net"
+	"net/http"
+	"net/url"
 	"github.com/project-flogo/core/activity"
 	"github.com/project-flogo/core/data/metadata"
 )
@@ -13,7 +16,7 @@ var activityMd = activity.ToMetadata(&Settings{}, &Input{}, &Output{})
 
 //New optional factory method, should be used if one activity instance per configuration is desired
 func New(ctx activity.InitContext) (activity.Activity, error) {
-
+/*
 	s := &Settings{}
 	err := metadata.MapToStruct(ctx.Settings(), s, true)
 	if err != nil {
@@ -21,7 +24,7 @@ func New(ctx activity.InitContext) (activity.Activity, error) {
 	}
 	ctx.Logger().Infof("Settings URL: %s", s.URL);
 	//ctx.Logger().Debugf("Setting: %s", s.ASetting)
-
+*/
 	act := &Activity{} //add aSetting to instance
 
 	return act, nil
@@ -46,6 +49,17 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 	}
 
 	ctx.Logger().Infof("Input: %s", input.QueryInput)
+
+	var client *http.Client 
+	urlString := input.QueryInput
+	url,err := url.Parse(urlString)
+	if err != nil {
+		return true, err
+	}
+	req, _ := http.NewRequest("GET",url.String(),nil)
+	resp, err = client.Do(req)
+
+	ctx.Logger().Infof(resp)
 
 	output := &Output{ResponseCode: 200}
 	err = ctx.SetOutputObject(output)
