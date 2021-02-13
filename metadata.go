@@ -27,7 +27,7 @@ type Output struct {
 }
 
 func (o *Output) FromMap(values map[string]interface{}) error {
-	strVal, _ := coerce.ToString(values["responseCode"])
+	strVal, _ := coerce.ToInt(values["responseCode"])
 	o.ResponseCode = strVal
 	return nil
 }
