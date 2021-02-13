@@ -26,13 +26,13 @@ type Output struct {
 	ResponseCode int `md:"responseCode"`
 }
 
-func (o *Output) FromMap(values map[int]interface{}) error {
+func (o *Output) FromMap(values map[string]interface{}) error {
 	strVal, _ := coerce.ToString(values["responseCode"])
 	o.ResponseCode = strVal
 	return nil
 }
 
-func (o *Output) ToMap() map[int]interface{} {
+func (o *Output) ToMap() map[string]interface{} {
 	return map[string]interface{}{
 		"responseCode": o.ResponseCode,
 	}
