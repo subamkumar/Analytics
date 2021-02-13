@@ -10,7 +10,7 @@ func init() {
 	_ = activity.Register(&Activity{}) //activity.Register(&Activity{}, New) to create instances using factory method 'New'
 }
 
-var activityMd = activity.ToMetadata(&Settings{}, &Input{}, &Output{})
+var activityMd = activity.ToMetadata(&Input{}, &Output{})
 
 //New optional factory method, should be used if one activity instance per configuration is desired
 func New(ctx activity.InitContext) (activity.Activity, error) {
@@ -48,7 +48,8 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 
 	ctx.Logger().Infof("Input: %s", input.QueryInput)
 
-	var client *http.Client 
+	var client *http.Client
+	var resp *http.Response
 	urlString := input.QueryInput
 	url,err := url.Parse(urlString)
 	if err != nil {
