@@ -48,15 +48,15 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 
 	ctx.Logger().Infof("Input: %s", input.QueryInput)
 
-	var client *http.Client
-	var resp *http.Response
+	client := &http.Client{}
+	
 	urlString := input.URL
 	url,err := url.Parse(urlString)
 	if err != nil {
 		return true, err
 	}
 	req, _ := http.NewRequest("GET",url.String(),nil)
-	resp, err = client.Do(req)
+	resp, err := client.Do(req)
 
 	ctx.Logger().Infof(resp.Status)
 
