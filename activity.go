@@ -58,7 +58,7 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 	req, _ := http.NewRequest("GET",url.String(),nil)
 	resp, err = client.Do(req)
 
-	ctx.Logger().Infof(resp.StatusCode)
+	ctx.Logger().Infof(resp.Status)
 
 	output := &Output{ResponseCode: 200}
 	err = ctx.SetOutputObject(output)
