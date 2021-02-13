@@ -11,8 +11,8 @@ func (r *Input) FromMap(values map[string]interface{}) error {
 	strVal, _ := coerce.ToString(values["queryInput"])
 	r.QueryInput = strVal
 
-	strVal, _ := coerce.ToString(values["URL"])
-	r.URL = strVal
+	urlVal, _ := coerce.ToString(values["URL"])
+	r.URL = urlVal
 
 	return nil
 }
@@ -20,7 +20,7 @@ func (r *Input) FromMap(values map[string]interface{}) error {
 func (r *Input) ToMap() map[string]interface{} {
 	return map[string]interface{}{
 		"queryInput": r.QueryInput,
-		"URL": r.URL
+		"URL": r.URL,
 	}
 }
 
