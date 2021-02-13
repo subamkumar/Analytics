@@ -19,8 +19,8 @@ func New(ctx activity.InitContext) (activity.Activity, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	ctx.Logger().Debugf("Setting: %s", s.ASetting)
+	ctx.Logger().Infof("Settings URL: %s", s.URL);
+	//ctx.Logger().Debugf("Setting: %s", s.ASetting)
 
 	act := &Activity{} //add aSetting to instance
 
@@ -45,9 +45,9 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 		return true, err
 	}
 
-	ctx.Logger().Debugf("Input: %s", input.AnInput)
+	ctx.Logger().Infof("Input: %s", input.QueryInput)
 
-	output := &Output{AnOutput: input.AnInput}
+	output := &Output{ResponseCode: 200}
 	err = ctx.SetOutputObject(output)
 	if err != nil {
 		return true, err

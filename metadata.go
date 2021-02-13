@@ -3,37 +3,37 @@ package sample
 import "github.com/project-flogo/core/data/coerce"
 
 type Settings struct {
-	ASetting string `md:"aSetting,required"`
+	URL string `md:"URL,required"`
 }
 
 type Input struct {
-	AnInput string `md:"anInput,required"`
+	QueryInput string `md:"queryInput,required"`
 }
 
 func (r *Input) FromMap(values map[string]interface{}) error {
-	strVal, _ := coerce.ToString(values["anInput"])
-	r.AnInput = strVal
+	strVal, _ := coerce.ToString(values["queryInput"])
+	r.QueryInput = strVal
 	return nil
 }
 
 func (r *Input) ToMap() map[string]interface{} {
 	return map[string]interface{}{
-		"anInput": r.AnInput,
+		"queryInput": r.QueryInput,
 	}
 }
 
 type Output struct {
-	AnOutput string `md:"anOutput"`
+	ResponseCode int `md:"responseCode"`
 }
 
-func (o *Output) FromMap(values map[string]interface{}) error {
-	strVal, _ := coerce.ToString(values["anOutput"])
-	o.AnOutput = strVal
+func (o *Output) FromMap(values map[int]interface{}) error {
+	strVal, _ := coerce.ToString(values["responseCode"])
+	o.ResponseCode = strVal
 	return nil
 }
 
-func (o *Output) ToMap() map[string]interface{} {
+func (o *Output) ToMap() map[int]interface{} {
 	return map[string]interface{}{
-		"anOutput": o.AnOutput,
+		"responseCode": o.ResponseCode,
 	}
 }

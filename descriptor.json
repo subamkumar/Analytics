@@ -8,22 +8,22 @@
   "homepage": "https://github.com/subamkumar/Flogo_Analytics",
   "settings": [
     {
-      "name": "aSetting",
+      "name": "URL",
       "type": "string",
       "required": true
     }
   ],
   "input": [
     {
-      "name": "anInput",
+      "name": "queryInput",
       "type": "string",
       "required": true
     }
   ],
   "output": [
     {
-      "name": "anOutput",
-      "type": "string"
+      "name": "responseCode",
+      "type": "number"
     }
   ]
 }
