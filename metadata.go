@@ -2,25 +2,44 @@ package sample
 
 import "github.com/project-flogo/core/data/coerce"
 
+type Settings struct{
+	URL string `md:"API Gateway URL,required"`
+}
+
 type Input struct {
-	URL string `md:"URL,required"`
-	QueryInput string `md:"queryInput,required"`
+	ProcessURL 		string 					`md:"process_url"`
+	ProcessorType 	string 					`md:"processor_type"`
+	Parameters 		map[string]interface{} 	`md:"parameters"`
+	Log				map[string]interface{}	`md:"log"`
+	PostProcesses 	[]interface{} 			`md:"post_processes"`
 }
 
 func (r *Input) FromMap(values map[string]interface{}) error {
-	strVal, _ := coerce.ToString(values["queryInput"])
-	r.QueryInput = strVal
+	processURLVal, _ := coerce.ToString(values["process_url"])
+	r.ProcessURL = processURLVal
 
-	urlVal, _ := coerce.ToString(values["URL"])
-	r.URL = urlVal
+	processTypeVal, _ := coerce.ToString(values["processor_type"])
+	r.ProcessorType = processTypeVal
+
+	parametersVal, _ := coerce.ToObject(values["parameters"])
+	r.Parameters = parametersVal
+
+	logVal, _ := coerce.ToObject(values["log"])
+	r.Log = logVal
+
+	postProcessesVal, _ := coerce.ToArray(values["post_processes"])
+	r.PostProcesses = postProcessesVal
 
 	return nil
 }
 
 func (r *Input) ToMap() map[string]interface{} {
 	return map[string]interface{}{
-		"queryInput": r.QueryInput,
-		"URL": r.URL,
+		"process_url": r.ProcessURL,
+		"processor_type": r.ProcessorType,
+		"parameters": r.Parameters,
+		"log": r.Log,
+		"post_processes": r.PostProcesses,
 	}
 }
 
