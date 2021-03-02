@@ -12,22 +12,22 @@ var activityMd = activity.ToMetadata(&Input{}, &Output{})
 
 //New optional factory method, should be used if one activity instance per configuration is desired
 func New(ctx activity.InitContext) (activity.Activity, error) {
-/*
+
 	s := &Settings{}
 	err := metadata.MapToStruct(ctx.Settings(), s, true)
 	if err != nil {
 		return nil, err
 	}
-	ctx.Logger().Infof("Settings URL: %s", s.URL);
-	//ctx.Logger().Debugf("Setting: %s", s.ASetting)
-*/
-	act := &Activity{} //add aSetting to instance
+	
+
+	act := &Activity{settings: s} //add Setting to instance
 
 	return act, nil
 }
 
 // Activity is an sample Activity that can be used as a base to create a custom activity
 type Activity struct {
+	settings	*Settings
 }
 
 // Metadata returns the activity's metadata
@@ -38,15 +38,17 @@ func (a *Activity) Metadata() *activity.Metadata {
 // Eval implements api.Activity.Eval - Logs the Message
 func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 
-	/*input := &Input{}
+	input := &Input{}
 	err = ctx.GetInputObject(input)
 	if err != nil {
 		return true, err
 	}
 
-	ctx.Logger().Infof("Input: %s", input.QueryInput)
+	ctx.Logger().Infof("API Gateway URL", a.settings.URL)
 
-	client := &http.Client{}
+	ctx.Logger().Infof(input)
+
+	/*client := &http.Client{}
 	
 	urlString := input.URL
 	url,err := url.Parse(urlString)
