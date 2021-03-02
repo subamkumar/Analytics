@@ -1,8 +1,6 @@
 package sample
 
 import (
-	"net/http"
-	"net/url"
 	"github.com/project-flogo/core/activity"
 )
 
