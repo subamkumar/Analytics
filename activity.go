@@ -46,7 +46,7 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 
 	ctx.Logger().Infof("API Gateway URL", a.settings.URL)
 
-	ctx.Logger().Infof(input)
+	ctx.Logger().Infof("Input: %s", input.(string))
 
 	/*client := &http.Client{}
 	
