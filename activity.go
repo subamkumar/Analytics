@@ -2,6 +2,7 @@ package sample
 
 import (
 	"bytes"
+	"encoding/json"
  	"github.com/project-flogo/core/activity"
  	"github.com/project-flogo/core/data/metadata"
  	"io"
@@ -61,11 +62,38 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 
  		method := "POST"
 
-		var body io.Reader
+		bodyData := make(map[string]interface{})
 
-		data := "{\"key1\":\"key2\"}"
+		if input.ProcessURL != "" {
+			bodyData["process_url"] = input.ProcessURL
+		}
+		
+		if input.ProcessorType != "" {
+			bodyData["processor_type"] = input.ProcessorType
+		}
+		
+		if input.Parameters != nil {
+			bodyData["parameters"] = input.Parameters
+		}
+		
+		if input.Log != nil {
+			bodyData["log"] = input.Log
+		}
+		
+		if input.PostProcesses != nil {
+			bodyData["post_processes"] = input.PostProcesses
+		}
+		
+		var bodyDatainBytes []byte
+		
+		err = json.Unmarshal(bodyDatainBytes,bodyData)
+		
+		if err != nil {
+			return true, err
+		}
 
-		body = bytes.NewBuffer([]byte(data))
+		var body io.Readerss
+		body = bytes.NewBuffer(bodyDatainBytes)
 
 	
 		req, _ := http.NewRequest(method, url.String(), body)
