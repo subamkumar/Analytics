@@ -49,23 +49,37 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 	
 	urlString := a.settings.URL
 	
-	url,err := url.Parse(urlString)
-	if err != nil {
-		return true, err
-	}
+	urlString := a.settings.URL
 
-	method := "GET"
+	if urlString!= "" {
+ 		url,err := url.Parse(urlString)
+ 		if err != nil {
+ 			return true, err
+ 		}
 
-	req, _ := http.NewRequest(method,url.String(),nil)
-	resp, err := client.Do(req)
+ 		method := "POST"
 
-	ctx.Logger().Infof(resp.Status)
+		var body io.Reader
 
-	output := &Output{ResponseCode: 200}
-	err = ctx.SetOutputObject(output)
-	if err != nil {
-		return true, err
-	}
+		data := "{\"key1\":\"key2\"}"
 
-	return true, nil
+		body = bytes.NewBuffer([]byte(data))
+
+	
+		req, _ := http.NewRequest(method, url.String(), body)
+
+		resp, err := a.client.Do(req)
+
+		ctx.Logger().Info("======")
+		ctx.Logger().Infof(resp.Status)
+
+		output := &Output{ResponseCode: 200}
+		err = ctx.SetOutputObject(output)
+		if err != nil {
+			return true, err
+		}
+
+ 		return true, nil
+ 	}
+ 	return true, activity.NewError("API Gateway URL is not provided","",nil)
 }
