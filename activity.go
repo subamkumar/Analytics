@@ -20,8 +20,9 @@ func New(ctx activity.InitContext) (activity.Activity, error) {
 		return nil, err
 	}
 	
+	c := &http.Client{}
 
-	act := &Activity{settings: s} //add Setting to instance
+	act := &Activity{settings: s, client: c} //add Setting to instance
 
 	return act, nil
 }
@@ -29,6 +30,7 @@ func New(ctx activity.InitContext) (activity.Activity, error) {
 // Activity is an sample Activity that can be used as a base to create a custom activity
 type Activity struct {
 	settings	*Settings
+	client		*http.Client
 }
 
 // Metadata returns the activity's metadata
@@ -44,21 +46,17 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 	if err != nil {
 		return true, err
 	}
-
-	ctx.Logger().Infof("API Gateway URL", a.settings.URL)
-
-	ctx.Logger().Infof("Input Process URL: ", input.ProcessURL)
-
-	ctx.Logger().Infof("Input Param: ", input.Parameters)
-
-	/*client := &http.Client{}
 	
-	urlString := input.URL
+	urlString := a.settings.URL
+	
 	url,err := url.Parse(urlString)
 	if err != nil {
 		return true, err
 	}
-	req, _ := http.NewRequest("GET",url.String(),nil)
+
+	method := "GET"
+
+	req, _ := http.NewRequest(method,url.String(),nil)
 	resp, err := client.Do(req)
 
 	ctx.Logger().Infof(resp.Status)
@@ -67,7 +65,7 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 	err = ctx.SetOutputObject(output)
 	if err != nil {
 		return true, err
-	}*/
+	}
 
 	return true, nil
 }
