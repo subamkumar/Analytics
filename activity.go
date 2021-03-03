@@ -1,8 +1,12 @@
 package sample
 
 import (
-	"github.com/project-flogo/core/activity"
-	"github.com/project-flogo/core/data/metadata"
+	"bytes"
+ 	"github.com/project-flogo/core/activity"
+ 	"github.com/project-flogo/core/data/metadata"
+ 	"io"
+ 	"net/http"
+ 	"net/url"
 )
 
 func init() {
@@ -46,8 +50,6 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 	if err != nil {
 		return true, err
 	}
-	
-	urlString := a.settings.URL
 	
 	urlString := a.settings.URL
 
