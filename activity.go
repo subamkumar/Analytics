@@ -64,35 +64,24 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 
 		bodyData := make(map[string]interface{})
 		
-		ctx.Logger().Infof("====TESTING DATA: ", bodyData)
 		if input.ProcessURL != "" {
-			ctx.Logger().Infof("===PROCESSURL: ", input.ProcessURL)	
 			bodyData["process_url"] = input.ProcessURL
-			ctx.Logger().Infof("BodyData: ", bodyData)
 		}
 		
 		if input.ProcessorType != "" {
-			ctx.Logger().Infof("===PROCESSTYPE: ", input.ProcessorType)
 			bodyData["processor_type"] = input.ProcessorType
-			ctx.Logger().Infof("BodyData: ", bodyData)
 		}
 		
 		if input.Parameters != nil {
-			ctx.Logger().Infof("===PARAM: ", input.Parameters)
 			bodyData["parameters"] = input.Parameters
-			ctx.Logger().Infof("BodyData: ", bodyData)
 		}
 		
 		if input.Log != nil {
-			ctx.Logger().Infof("===LOG: ", input.Log)
 			bodyData["log"] = input.Log
-			ctx.Logger().Infof("BodyData: ", bodyData)
 		}
 		
 		if input.PostProcesses != nil {
-			ctx.Logger().Infof("===POST_PROCESSES: ", input.PostProcesses)
 			bodyData["post_processes"] = input.PostProcesses
-			ctx.Logger().Infof("BodyData: ", bodyData)
 		}
 		
 		b,err := json.Marshal(bodyData)
@@ -109,10 +98,7 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 
 		resp, err := a.client.Do(req)
 
-		ctx.Logger().Info("======")
-		ctx.Logger().Infof(resp.Status)
-
-		output := &Output{ResponseCode: 200}
+		output := &Output{ResponseCode: resp.StatusCode}
 		err = ctx.SetOutputObject(output)
 		if err != nil {
 			return true, err
