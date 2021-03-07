@@ -8,6 +8,15 @@
   "homepage": "https://github.com/subamkumar/Flogo_Analytics",
   "settings":[
     {
+      "name":"TestBoolean",
+      "type":"boolean",
+      "required":"true",
+      "diaplay":{
+        "name":"TestBoolean"
+      },
+      "value":false
+    },
+    {
       "name": "API Gateway URL",
       "type": "string",
       "required": true,

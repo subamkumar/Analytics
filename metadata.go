@@ -4,6 +4,7 @@ import "github.com/project-flogo/core/data/coerce"
 
 type Settings struct{
 	URL string `md:"API Gateway URL,required"`
+	Radio string `md:"TestBoolean,required"`
 }
 
 type Input struct {
