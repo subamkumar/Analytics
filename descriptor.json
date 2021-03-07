@@ -10,13 +10,25 @@
     {
       "name": "API Gateway URL",
       "type": "string",
-      "required": true
-    } 
+      "required": true,
+      "display":{
+        "name":"API Gateway URL",
+        "type":"dropdown",
+        "selection":"single"
+      },
+      "allowed":["url1","url2","url3"]
+    }
   ],
   "input": [
     {
       "name": "process_url",
-      "type": "string"
+      "type": "string",
+      "display":{
+        "name":"Process URL",
+        "type":"dropdown",
+        "selection":"single"
+      },
+      "allowed":["url1","url2","url3"]
     },
     {
       "name": "processor_type",
