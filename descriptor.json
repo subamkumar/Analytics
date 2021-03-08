@@ -12,7 +12,8 @@
       "type":"boolean",
       "required":"true",
       "diaplay":{
-        "name":"TestBoolean"
+        "name":"TestBoolean",
+        "visible":false
       },
       "value":false
     },
