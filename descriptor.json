@@ -8,15 +8,6 @@
   "homepage": "https://github.com/subamkumar/Flogo_Analytics",
   "settings":[
     {
-      "name":"TestBoolean",
-      "type":"boolean",
-      "required":"true",
-      "diaplay":{
-        "name":"TestBoolean"
-      },
-      "value":false
-    },
-    {
       "name": "API Gateway URL",
       "type": "string",
       "required": true,
@@ -30,30 +21,29 @@
   ],
   "input": [
     {
-      "name": "process_url",
+      "name": "process_type",
       "type": "string",
       "display":{
-        "name":"Process URL",
         "type":"dropdown",
         "selection":"single"
       },
-      "allowed":["url1","url2","url3"]
+      "allowed":["collections","locations","activities","processes"]
     },
     {
-      "name": "processor_type",
+      "name": "getID",
       "type": "string"
     },
     {
-      "name":"parameters",
-      "type":"object"
+      "name":"filterByCollectionId",
+      "type":"string"
     },
     {
-      "name":"log",
-      "type":"object"
+      "name":"filterByLocationId",
+      "type":"string"
     },
     {
-      "name":"post_processes",
-      "type":"array"
+      "name":"filterByActivityId",
+      "type":"string"
     }
   ],
   "output": [
