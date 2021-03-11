@@ -21,7 +21,7 @@
   ],
   "input": [
     {
-      "name": "process_type",
+      "name": "processType",
       "type": "string",
       "display":{
         "type":"dropdown",
@@ -30,7 +30,7 @@
       "allowed":["collections","locations","activities","processes"]
     },
     {
-      "name": "getID",
+      "name": "getId",
       "type": "string"
     },
     {
