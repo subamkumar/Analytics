@@ -17,9 +17,7 @@
     {
       "name": "processType",
       "type": "string",
-      "required": true,
       "display":{
-        "name":"processType",
         "type":"dropdown",
         "selection":"single"
       },
@@ -27,25 +25,25 @@
     },
     {
       "name": "getId",
-      "type": "int"
+      "type": "string"
     },
     {
       "name":"filterByCollectionId",
-      "type":"int"
+      "type":"string"
     },
     {
       "name":"filterByLocationId",
-      "type":"int"
+      "type":"string"
     },
     {
       "name":"filterByActivityId",
-      "type":"int"
+      "type":"string"
     }
   ],
   "output": [
     {
       "name": "responseCode",
-      "type": "int"
+      "type": "number"
     }
   ]
 }
