@@ -6,16 +6,19 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"fmt"
 )
 
 func init() {
+	fmt.Prinln("inti start")
 	_ = activity.Register(&Activity{},New)
+	fmt.Println("init end")
 }
 
-var activityMd = activity.ToMetadata(&Settings{},&Input{}, &Output{})
+var activityMd = activity.ToMetadata(&Settings{}, &Input{}, &Output{})
 
 func New(ctx activity.InitContext) (activity.Activity, error) {
-
+	fmt.Prinln("New Start")
 	s := &Settings{}
 	err := metadata.MapToStruct(ctx.Settings(), s, true)
 	if err != nil {
@@ -25,7 +28,7 @@ func New(ctx activity.InitContext) (activity.Activity, error) {
 	c := &http.Client{}
 
 	act := &Activity{settings: s, client: c}
-
+	fmt.Println("New End")
 	return act, nil
 }
 
