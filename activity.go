@@ -1,22 +1,19 @@
 package sample
 
 import (
-	"bytes"
-	"encoding/json"
- 	"github.com/project-flogo/core/activity"
- 	"github.com/project-flogo/core/data/metadata"
- 	"io"
- 	"net/http"
- 	"net/url"
+	"github.com/project-flogo/core/activity"
+	"github.com/project-flogo/core/data/metadata"
+	"net/http"
+	"net/url"
+	"strings"
 )
 
 func init() {
-	_ = activity.Register(&Activity{},New) //activity.Register(&Activity{}, New) to create instances using factory method 'New'
+	_ = activity.Register(&Activity{},New)
 }
 
 var activityMd = activity.ToMetadata(&Settings{},&Input{}, &Output{})
 
-//New optional factory method, should be used if one activity instance per configuration is desired
 func New(ctx activity.InitContext) (activity.Activity, error) {
 
 	s := &Settings{}
@@ -27,23 +24,23 @@ func New(ctx activity.InitContext) (activity.Activity, error) {
 	
 	c := &http.Client{}
 
-	act := &Activity{settings: s, client: c} //add Setting to instance
+	act := &Activity{settings: s, client: c}
 
 	return act, nil
 }
 
-// Activity is an sample Activity that can be used as a base to create a custom activity
+
 type Activity struct {
 	settings	*Settings
 	client		*http.Client
 }
 
-// Metadata returns the activity's metadata
+
 func (a *Activity) Metadata() *activity.Metadata {
 	return activityMd
 }
 
-// Eval implements api.Activity.Eval - Logs the Message
+
 func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 
 	input := &Input{}
@@ -60,51 +57,47 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
  			return true, err
  		}
 
- 		method := "POST"
+ 		method := "GET"
 
-		bodyData := make(map[string]interface{})
-		
-		if input.ProcessURL != "" {
-			bodyData["process_url"] = input.ProcessURL
-		}
-		
-		if input.ProcessorType != "" {
-			bodyData["processor_type"] = input.ProcessorType
-		}
-		
-		if input.Parameters != nil {
-			bodyData["parameters"] = input.Parameters
-		}
-		
-		if input.Log != nil {
-			bodyData["log"] = input.Log
-		}
-		
-		if input.PostProcesses != nil {
-			bodyData["post_processes"] = input.PostProcesses
-		}
-		
-		b,err := json.Marshal(bodyData)
-		
-		if err != nil {
-			return true, err
-		}
+ 		if input.ProcessorType != "" {
 
-		var body io.Reader
-		body = bytes.NewBuffer(b)
+			if strings.LastIndex(urlString,"/") == len(urlString)-1 {
+				urlString = urlString+input.ProcessorType
+			}else{
+				urlString = urlString+"/"+input.ProcessorType
+			}
 
-	
-		req, _ := http.NewRequest(method, url.String(), body)
 
-		resp, err := a.client.Do(req)
+			if input.getById != 0 {
+				urlString = urlString+"/"+string(input.getById)
 
-		output := &Output{ResponseCode: resp.StatusCode}
-		err = ctx.SetOutputObject(output)
-		if err != nil {
-			return true, err
+			}else{
+
+				if input.CollectionQueryId != 0 {
+					urlString = urlString+"?collection_id"+string(input.CollectionQueryId)
+				}
+
+				if input.ActivityQueryId != 0 {
+					urlString = urlString+"?activity_id"+string(input.ActivityQueryId)
+				}
+
+				if input.LocationQueryId != 0 {
+					urlString = urlString+"?location_id"+string(input.LocationQueryId)
+				}
+			}
+
+			req, _ := http.NewRequest(method, url.String(), nil)
+			resp, err := a.client.Do(req)
+
+			output := &Output{ResponseCode: resp.StatusCode}
+			err = ctx.SetOutputObject(output)
+			if err != nil {
+				return true, err
+			}
+
+			return true, nil
+
 		}
-
- 		return true, nil
  	}
  	return true, activity.NewError("API Gateway URL is not provided","",nil)
 }
