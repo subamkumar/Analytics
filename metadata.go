@@ -7,7 +7,7 @@ type Settings struct{
 }
 
 type Input struct {
-	ProcessorType 		string 					`md:"processType"`
+	ProcessorType 		string 					`md:"processType,required"`
 	getById 			int 					`md:"getId"`
 	CollectionQueryId 	int	 					`md:"filterByCollectionId"`
 	LocationQueryId		int						`md:"filterByLocationId"`
