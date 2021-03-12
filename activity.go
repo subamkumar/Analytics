@@ -70,9 +70,7 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 
 			if input.getById != 0 {
 				urlString = urlString+"/"+string(input.getById)
-
 			}else{
-
 				if input.CollectionQueryId != 0 {
 					urlString = urlString+"?collection_id"+string(input.CollectionQueryId)
 				}
@@ -96,7 +94,6 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 			}
 
 			return true, nil
-
 		}
  	}
  	return true, activity.NewError("API Gateway URL is not provided","",nil)
