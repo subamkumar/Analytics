@@ -1,11 +1,8 @@
 package sample
 
 import (
-	"bytes"
-	"encoding/json"
  	"github.com/project-flogo/core/activity"
  	"github.com/project-flogo/core/data/metadata"
- 	"io"
  	"net/http"
  	"net/url"
 )
@@ -60,40 +57,8 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
  		}
 
  		method := "GET"
-
-		bodyData := make(map[string]interface{})
-		
-		if input.ProcessURL != "" {
-			bodyData["process_url"] = input.ProcessURL
-		}
-		
-		if input.ProcessorType != "" {
-			bodyData["processor_type"] = input.ProcessorType
-		}
-		
-		if input.Parameters != nil {
-			bodyData["parameters"] = input.Parameters
-		}
-		
-		if input.Log != nil {
-			bodyData["log"] = input.Log
-		}
-		
-		if input.PostProcesses != nil {
-			bodyData["post_processes"] = input.PostProcesses
-		}
-		
-		b,err := json.Marshal(bodyData)
-		
-		if err != nil {
-			return true, err
-		}
-
-		var body io.Reader
-		body = bytes.NewBuffer(b)
-
 	
-		req, _ := http.NewRequest(method, url.String(), body)
+		req, _ := http.NewRequest(method, url.String(), nil)
 
 		resp, err := a.client.Do(req)
 
