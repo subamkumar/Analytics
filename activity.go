@@ -10,7 +10,7 @@ import (
 )
 
 func init() {
-	fmt.Prinln("inti start")
+	fmt.Println("inti start")
 	_ = activity.Register(&Activity{},New)
 	fmt.Println("init end")
 }
@@ -18,7 +18,7 @@ func init() {
 var activityMd = activity.ToMetadata(&Settings{}, &Input{}, &Output{})
 
 func New(ctx activity.InitContext) (activity.Activity, error) {
-	fmt.Prinln("New Start")
+	fmt.Println("New Start")
 	s := &Settings{}
 	err := metadata.MapToStruct(ctx.Settings(), s, true)
 	if err != nil {
