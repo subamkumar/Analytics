@@ -19,6 +19,7 @@
       "type": "string",
       "required": true,
       "display":{
+        "name":"processType",
         "type":"dropdown",
         "selection":"single"
       },
@@ -26,19 +27,19 @@
     },
     {
       "name": "getId",
-      "type": "number"
+      "type": "int"
     },
     {
       "name":"filterByCollectionId",
-      "type":"number"
+      "type":"int"
     },
     {
       "name":"filterByLocationId",
-      "type":"number"
+      "type":"int"
     },
     {
       "name":"filterByActivityId",
-      "type":"number"
+      "type":"int"
     }
   ],
   "output": [
