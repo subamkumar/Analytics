@@ -74,16 +74,31 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 			if input.PathParamId != 0 {
 				urlString = urlString+"/"+strconv.Itoa(input.PathParamId)
 			}else{
+
+				queryString := ""
+
 				if input.CollectionId != 0 {
-					urlString = urlString+"?collection_id"+strconv.Itoa(input.CollectionId)
+					queryString = queryString+"collection_id="+strconv.Itoa(input.CollectionId)
 				}
 
 				if input.ActivityId != 0 {
-					urlString = urlString+"?activity_id"+strconv.Itoa(input.ActivityId)
+					if len(queryString) > 0 {
+						queryString = queryString+"&"+"activity_id="+strconv.Itoa(input.ActivityId)
+					}else{
+						queryString = queryString+"activity_id="+strconv.Itoa(input.ActivityId)
+					}
 				}
 
 				if input.LocationId != 0 {
-					urlString = urlString+"?location_id"+strconv.Itoa(input.LocationId)
+					if len(queryString) > 0 {
+						queryString = queryString+"&"+"location_id="+strconv.Itoa(input.LocationId)
+					}else{
+						queryString = queryString+"location_id="+strconv.Itoa(input.LocationId)
+					}
+				}
+
+				if len(queryString) > 0 {
+					urlString = urlString+"?"+queryString
 				}
 			}
 
@@ -100,6 +115,7 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 
 			return true, nil
 		}
+		return true, activity.NewError("Required Process Type is not provided","",nil)
 	}
 
 	return true, activity.NewError("API Gateway URL is not provided","",nil)
