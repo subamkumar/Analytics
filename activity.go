@@ -65,25 +65,25 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 		if input.ProcessType != "" {
 
 			if strings.LastIndex(urlString,"/") == len(urlString)-1 {
-				urlString = urlString+input.ProcessorType
+				urlString = urlString+input.ProcessType
 			}else{
-				urlString = urlString+"/"+input.ProcessorType
+				urlString = urlString+"/"+input.ProcessType
 			}
 
 
-			if input.getById != 0 {
-				urlString = urlString+"/"+string(input.getById)
+			if input.PathParamId != 0 {
+				urlString = urlString+"/"+string(input.PathParamId)
 			}else{
-				if input.CollectionQueryId != 0 {
-					urlString = urlString+"?collection_id"+string(input.CollectionQueryId)
+				if input.CollectionId != 0 {
+					urlString = urlString+"?collection_id"+string(input.CollectionId)
 				}
 
-				if input.ActivityQueryId != 0 {
-					urlString = urlString+"?activity_id"+string(input.ActivityQueryId)
+				if input.ActivityId != 0 {
+					urlString = urlString+"?activity_id"+string(input.ActivityId)
 				}
 
-				if input.LocationQueryId != 0 {
-					urlString = urlString+"?location_id"+string(input.LocationQueryId)
+				if input.LocationId != 0 {
+					urlString = urlString+"?location_id"+string(input.LocationId)
 				}
 			}
 
