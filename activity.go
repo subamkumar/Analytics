@@ -5,7 +5,6 @@ import (
 	"github.com/project-flogo/core/data/metadata"
 	"net/http"
  	"net/url"
-	"strings"
 )
 
 func init() {
