@@ -103,12 +103,35 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 				}
 			}
 
-			ctx.Logger().Debugf("FORMED_URL: %s", urlString)
+			//ctx.Logger().Debugf("FORMED_URL: %s", urlString)
 
 			req, _ := http.NewRequest(method, urlString, nil)
 			resp, err := a.client.Do(req)
 
-			output := &Output{ResponseCode: resp.StatusCode}
+			var responseData interface{}
+
+			respContentType := resp.Header.Get("Content-Type")
+			switch respContentType {
+				case "application/json":
+					d := json.NewDecoder(resp.Body)
+					d.UseNumber()
+					err = d.Decode(&result)
+					if err != nil {
+						switch {
+							case err == io.EOF:
+							default:
+								return false, err
+						}
+					}
+				default:
+					b, err := ioutil.ReadAll(resp.Body)
+					if err != nil {
+						return false, err
+					}
+				responseData = string(b)
+			}
+
+			output := &Output{ResponseCode: resp.StatusCode, ResponseData: responseData}
 			err = ctx.SetOutputObject(output)
 			if err != nil {
 				return true, err

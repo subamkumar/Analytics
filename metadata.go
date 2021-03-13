@@ -45,16 +45,22 @@ func (r *Input) ToMap() map[string]interface{} {
 
 type Output struct {
 	ResponseCode int `md:"responseCode"`
+	ResponseData int `md:"responseData"`
 }
 
 func (o *Output) FromMap(values map[string]interface{}) error {
 	responseCodeVal, _ := coerce.ToInt(values["responseCode"])
 	o.ResponseCode = responseCodeVal
+
+	responseDataVal, _ := coerce.ToInt(values["responseData"])
+	o.ResponseData = responseDataVal
+
 	return nil
 }
 
 func (o *Output) ToMap() map[string]interface{} {
 	return map[string]interface{}{
 		"responseCode": o.ResponseCode,
+		"responseData": o.ResponseData,
 	}
 }
