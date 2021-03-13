@@ -61,7 +61,7 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
  			return true, err
  		}
 		
-		method := "GET"
+		//method := "GET"
 
 		if input.ProcessType != "" {
 
