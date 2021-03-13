@@ -55,7 +55,7 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 	urlString := a.settings.API_BASE_URL
 
 	if urlString!= "" {
-		url,err := url.Parse(urlString)
+		_,err := url.Parse(urlString)
  		if err != nil {
  			return true, err
  		}
@@ -87,9 +87,9 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 				}
 			}
 
-			ctx.Logger().Debugf("FORMED_URL: %s", urlString)
+			ctx.Logger().Debugf("FORMED_URL: %s", url.String())
 
-			req, _ := http.NewRequest(method, urlString, nil)
+			req, _ := http.NewRequest(method, url.String(), nil)
 			resp, err := a.client.Do(req)
 
 			output := &Output{ResponseCode: resp.StatusCode}
