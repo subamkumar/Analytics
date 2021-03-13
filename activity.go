@@ -20,7 +20,7 @@ func New(ctx activity.InitContext) (activity.Activity, error) {
 		return nil, err
 	}
 
-	ctx.Logger().Debugf("Setting: %s", s.ASetting)
+	ctx.Logger().Debugf("Setting: %s", s.API_BASE_URL)
 
 	act := &Activity{} //add aSetting to instance
 
@@ -45,7 +45,11 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 		return true, err
 	}
 
-	ctx.Logger().Debugf("Input: %s", input.AnInput)
+	ctx.Logger().Debugf("Input: %s", input.ProcessType)
+	ctx.Logger().Debugf("Input: %s", input.PathParamId)
+	ctx.Logger().Debugf("Input: %s", input.CollectionId)
+	ctx.Logger().Debugf("Input: %s", input.LocationId)
+	ctx.Logger().Debugf("Input: %s", input.ActivityId)
 
 	output := &Output{AnOutput: input.AnInput}
 	err = ctx.SetOutputObject(output)

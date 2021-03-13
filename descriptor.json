@@ -4,19 +4,34 @@
   "version": "0.0.1",
   "title": "Sample Activity",
   "description": "Sample Activity",
-  "homepage": "https://github.com/project-flogo/tree/master/examples/activity",
   "settings": [
     {
-      "name": "aSetting",
+      "name": "API_Base_URI",
       "type": "string",
       "required": true
     }
   ],
   "input": [
     {
-      "name": "anInput",
+      "name": "processType",
       "type": "string",
       "required": true
+    },
+    {
+      "name": "getId",
+      "type": "string"
+    },
+    {
+      "name": "filterByCollectionId",
+      "type": "string"
+    },
+    {
+      "name": "filterByLocationId",
+      "type": "string"
+    },
+    {
+      "name": "filterByActivityId",
+      "type": "string"
     }
   ],
   "output": [
