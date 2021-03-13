@@ -44,8 +44,8 @@ func (r *Input) ToMap() map[string]interface{} {
 }
 
 type Output struct {
-	ResponseCode int `md:"responseCode"`
-	ResponseData int `md:"responseData"`
+	ResponseCode int 			`md:"responseCode"`
+	ResponseData interface{} 	`md:"responseData"`
 }
 
 func (o *Output) FromMap(values map[string]interface{}) error {

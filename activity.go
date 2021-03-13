@@ -7,6 +7,9 @@ import (
  	"net/url"
 	"strconv"
 	"strings"
+	"encoding/json"
+	"io"
+	"io/ioutil"
 )
 
 func init() {
@@ -115,7 +118,7 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 				case "application/json":
 					d := json.NewDecoder(resp.Body)
 					d.UseNumber()
-					err = d.Decode(&result)
+					err = d.Decode(&responseData)
 					if err != nil {
 						switch {
 							case err == io.EOF:
