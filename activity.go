@@ -61,7 +61,7 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
  			return true, err
  		}
 		
-		//method := "GET"
+		method := "GET"
 
 		if input.ProcessType != "" {
 
@@ -105,8 +105,8 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 
 			ctx.Logger().Debugf("FORMED_URL: %s", urlString)
 
-			//req, _ := http.NewRequest(method, urlString, nil)
-			//resp, err := a.client.Do(req)
+			req, _ := http.NewRequest(method, urlString, nil)
+			resp, err := a.client.Do(req)
 
 			output := &Output{ResponseCode: 2020}
 			err = ctx.SetOutputObject(output)
