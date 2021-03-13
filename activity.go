@@ -73,7 +73,7 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 
 
 			if input.PathParamId != 0 {
-				urlString = urlString+"/"+string(input.PathParamId)
+				urlString = urlString+"/"+strconv.Itoa(input.PathParamId)
 			}else{
 				if input.CollectionId != 0 {
 					urlString = urlString+"?collection_id"+strconv.Itoa(input.CollectionId)
