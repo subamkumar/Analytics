@@ -15,29 +15,8 @@
   ],
   "input": [
     {
-      "name": "processType",
-      "type": "string",
-      "display":{
-        "type":"dropdown",
-        "selection":"single"
-      },
-      "allowed":["collections","locations","activities","processes"]
-    },
-    {
       "name": "getId",
       "type": "string"
-    },
-    {
-      "name":"filterByCollectionId",
-      "type":"string"
-    },
-    {
-      "name":"filterByLocationId",
-      "type":"string"
-    },
-    {
-      "name":"filterByActivityId",
-      "type":"string"
     }
   ],
   "output": [

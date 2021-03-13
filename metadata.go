@@ -7,39 +7,39 @@ type Settings struct{
 }
 
 type Input struct {
-	ProcessorType 		string 					`md:"processType"`
+	//ProcessorType 		string 					`md:"processType"`
 	getById 			string 					`md:"getId"`
-	CollectionQueryId 	string	 				`md:"filterByCollectionId"`
-	LocationQueryId		string					`md:"filterByLocationId"`
-	ActivityQueryId 	string		 			`md:"filterByActivityId"`
+	//CollectionQueryId 	string	 				`md:"filterByCollectionId"`
+	//LocationQueryId		string					`md:"filterByLocationId"`
+	//ActivityQueryId 	string		 			`md:"filterByActivityId"`
 }
 
 func (r *Input) FromMap(values map[string]interface{}) error {
-	processTypeVal, _ := coerce.ToString(values["processType"])
-	r.ProcessorType = processTypeVal
+	/*processTypeVal, _ := coerce.ToString(values["processType"])
+	r.ProcessorType = processTypeVal*/
 
 	pathGetId, _ := coerce.ToString(values["getId"])
 	r.getById = pathGetId
 
-	collectionFilter, _ := coerce.ToString(values["filterByCollectionId"])
+	/*collectionFilter, _ := coerce.ToString(values["filterByCollectionId"])
 	r.CollectionQueryId = collectionFilter
 
 	locationFilter, _ := coerce.ToString(values["filterByLocationId"])
 	r.LocationQueryId = locationFilter
 
 	activityFilter, _ := coerce.ToString(values["filterByActivityId"])
-	r.ActivityQueryId = activityFilter
+	r.ActivityQueryId = activityFilter*/
 
 	return nil
 }
 
 func (r *Input) ToMap() map[string]interface{} {
 	return map[string]interface{}{
-		"processType": r.ProcessorType,
+		//"processType": r.ProcessorType,
 		"getId": r.getById,
-		"filterByCollectionId": r.CollectionQueryId,
-		"filterByLocationId": r.LocationQueryId,
-		"filterByActivityId": r.ActivityQueryId,
+		//"filterByCollectionId": r.CollectionQueryId,
+		//"filterByLocationId": r.LocationQueryId,
+		//"filterByActivityId": r.ActivityQueryId,
 	}
 }
 

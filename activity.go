@@ -11,7 +11,7 @@ func init() {
 	_ = activity.Register(&Activity{},New)
 }
 
-var activityMd = activity.ToMetadata(&Settings{},&Input{}, &Output{})
+var activityMd = activity.ToMetadata(&Settings{},&Input{},&Output{})
 
 func New(ctx activity.InitContext) (activity.Activity, error) {
 
