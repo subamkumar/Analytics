@@ -108,7 +108,7 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 			req, _ := http.NewRequest(method, urlString, nil)
 			resp, err := a.client.Do(req)
 
-			output := &Output{ResponseCode: 2020}
+			output := &Output{ResponseCode: resp.StatusCode}
 			err = ctx.SetOutputObject(output)
 			if err != nil {
 				return true, err
