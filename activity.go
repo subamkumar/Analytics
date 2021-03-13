@@ -46,10 +46,10 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 	}
 
 	ctx.Logger().Debugf("Input: %s", input.ProcessType)
-	ctx.Logger().Debugf("Input: %s", input.PathParamId)
-	ctx.Logger().Debugf("Input: %s", input.CollectionId)
-	ctx.Logger().Debugf("Input: %s", input.LocationId)
-	ctx.Logger().Debugf("Input: %s", input.ActivityId)
+	ctx.Logger().Debugf("Input: %d", input.PathParamId)
+	ctx.Logger().Debugf("Input: %d", input.CollectionId)
+	ctx.Logger().Debugf("Input: %d", input.LocationId)
+	ctx.Logger().Debugf("Input: %d", input.ActivityId)
 
 	output := &Output{AnOutput: "OUTPUT_VAL"}
 	err = ctx.SetOutputObject(output)

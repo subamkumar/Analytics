@@ -19,19 +19,19 @@
     },
     {
       "name": "getId",
-      "type": "string"
+      "type": "number"
     },
     {
       "name": "filterByCollectionId",
-      "type": "string"
+      "type": "number"
     },
     {
       "name": "filterByLocationId",
-      "type": "string"
+      "type": "number"
     },
     {
       "name": "filterByActivityId",
-      "type": "string"
+      "type": "number"
     }
   ],
   "output": [

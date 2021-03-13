@@ -7,27 +7,27 @@ type Settings struct {
 }
 
 type Input struct {
-	ProcessType 	string `md:"processType,required"`
-	PathParamId 	string `md:"getId"`
-	CollectionId	string `md:"filterByCollectionId"`
-	LocationId		string `md:"filterByLocationId"`
-	ActivityId 		string `md:"filterByActivityId"`
+	ProcessType 	string	`md:"processType,required"`
+	PathParamId 	int		`md:"getId"`
+	CollectionId	int		`md:"filterByCollectionId"`
+	LocationId		int		`md:"filterByLocationId"`
+	ActivityId 		int		`md:"filterByActivityId"`
 }
 
 func (r *Input) FromMap(values map[string]interface{}) error {
 	processTypeVal, _ := coerce.ToString(values["processType"])
 	r.ProcessType = processTypeVal
 
-	pathParamIdVal, _ := coerce.ToString(values["getId"])
+	pathParamIdVal, _ := coerce.ToInt(values["getId"])
 	r.PathParamId = pathParamIdVal
 
-	collectionIdVal, _ := coerce.ToString(values["filterByCollectionId"])
+	collectionIdVal, _ := coerce.ToInt(values["filterByCollectionId"])
 	r.CollectionId = collectionIdVal
 
-	locationIdVal, _ := coerce.ToString(values["filterByLocationId"])
+	locationIdVal, _ := coerce.ToInt(values["filterByLocationId"])
 	r.LocationId = locationIdVal
 
-	activityIdVal, _ := coerce.ToString(values["filterByActivityId"])
+	activityIdVal, _ := coerce.ToInt(values["filterByActivityId"])
 	r.ActivityId = activityIdVal
 
 	return nil
