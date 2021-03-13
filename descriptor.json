@@ -1,28 +1,27 @@
 {
-  "name": "Flogo-Analytics-activity",
+  "name": "sample-activity",
   "type": "flogo:activity",
   "version": "0.0.1",
-  "ref":"https://github.com/subamkumar/Flogo_Analytics",
-  "title": "FLOGO Analytics",
-  "description": "FLOGO Analytics",
-  "homepage": "https://github.com/subamkumar/Flogo_Analytics",
-  "settings":[
+  "title": "Sample Activity",
+  "description": "Sample Activity",
+  "homepage": "https://github.com/project-flogo/tree/master/examples/activity",
+  "settings": [
     {
-      "name": "API Gateway URL",
+      "name": "aSetting",
       "type": "string",
       "required": true
     }
   ],
   "input": [
     {
-      "name": "getId",
-      "type": "string"
+      "name": "anInput",
+      "type": "string",
+      "required": true
     }
   ],
   "output": [
     {
-      "name": "responseCode",
-      "type": "number"
+      "name": "anOutput",
+      "type": "string"
     }
   ]
-}

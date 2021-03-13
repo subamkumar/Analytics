@@ -1,18 +1,17 @@
 package sample
 
 import (
- 	"github.com/project-flogo/core/activity"
- 	"github.com/project-flogo/core/data/metadata"
- 	"net/http"
- 	"net/url"
+	"github.com/project-flogo/core/activity"
+	"github.com/project-flogo/core/data/metadata"
 )
 
 func init() {
-	_ = activity.Register(&Activity{})
+	_ = activity.Register(&Activity{}) //activity.Register(&Activity{}, New) to create instances using factory method 'New'
 }
 
-var activityMd = activity.ToMetadata(&Settings{},&Input{},&Output{})
+var activityMd = activity.ToMetadata(&Settings{}, &Input{}, &Output{})
 
+//New optional factory method, should be used if one activity instance per configuration is desired
 func New(ctx activity.InitContext) (activity.Activity, error) {
 
 	s := &Settings{}
@@ -20,26 +19,24 @@ func New(ctx activity.InitContext) (activity.Activity, error) {
 	if err != nil {
 		return nil, err
 	}
-	
-	c := &http.Client{}
 
-	act := &Activity{settings: s, client: c}
+	ctx.Logger().Debugf("Setting: %s", s.ASetting)
+
+	act := &Activity{} //add aSetting to instance
 
 	return act, nil
 }
 
-
+// Activity is an sample Activity that can be used as a base to create a custom activity
 type Activity struct {
-	settings	*Settings
-	client		*http.Client
 }
 
-
+// Metadata returns the activity's metadata
 func (a *Activity) Metadata() *activity.Metadata {
 	return activityMd
 }
 
-
+// Eval implements api.Activity.Eval - Logs the Message
 func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 
 	input := &Input{}
@@ -47,28 +44,14 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 	if err != nil {
 		return true, err
 	}
-	
-	urlString := a.settings.URL
 
-	if urlString!= "" {
- 		url,err := url.Parse(urlString)
- 		if err != nil {
- 			return true, err
- 		}
+	ctx.Logger().Debugf("Input: %s", input.AnInput)
 
- 		method := "GET"
-	
-		req, _ := http.NewRequest(method, url.String(), nil)
+	output := &Output{AnOutput: input.AnInput}
+	err = ctx.SetOutputObject(output)
+	if err != nil {
+		return true, err
+	}
 
-		resp, err := a.client.Do(req)
-
-		output := &Output{ResponseCode: resp.StatusCode}
-		err = ctx.SetOutputObject(output)
-		if err != nil {
-			return true, err
-		}
-
- 		return true, nil
- 	}
- 	return true, activity.NewError("API Gateway URL is not provided","",nil)
+	return true, nil
 }
