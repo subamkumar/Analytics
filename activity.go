@@ -8,7 +8,7 @@ import (
 )
 
 func init() {
-	_ = activity.Register(&Activity{},New)
+	_ = activity.Register(&Activity{})
 }
 
 var activityMd = activity.ToMetadata(&Settings{},&Input{},&Output{})
