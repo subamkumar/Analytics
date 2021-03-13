@@ -5,6 +5,8 @@ import (
 	"github.com/project-flogo/core/data/metadata"
 	"net/http"
  	"net/url"
+	"strconv"
+	"strings"
 )
 
 func init() {
@@ -63,35 +65,35 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 
 		if input.ProcessType != "" {
 
-			/*if strings.LastIndex(urlString,"/") == len(urlString)-1 {
+			if strings.LastIndex(urlString,"/") == len(urlString)-1 {
 				urlString = urlString+input.ProcessType
 			}else{
 				urlString = urlString+"/"+input.ProcessType
-			}*/
+			}
 
 
 			if input.PathParamId != 0 {
 				urlString = urlString+"/"+string(input.PathParamId)
 			}else{
 				if input.CollectionId != 0 {
-					urlString = urlString+"?collection_id"+string(input.CollectionId)
+					urlString = urlString+"?collection_id"+strconv.Itoa(input.CollectionId)
 				}
 
 				if input.ActivityId != 0 {
-					urlString = urlString+"?activity_id"+string(input.ActivityId)
+					urlString = urlString+"?activity_id"+strconv.Itoa(input.ActivityId)
 				}
 
 				if input.LocationId != 0 {
-					urlString = urlString+"?location_id"+string(input.LocationId)
+					urlString = urlString+"?location_id"+strconv.Itoa(input.LocationId)
 				}
 			}
 
 			ctx.Logger().Debugf("FORMED_URL: %s", urlString)
 
-			req, _ := http.NewRequest(method, urlString, nil)
-			resp, err := a.client.Do(req)
+			//req, _ := http.NewRequest(method, urlString, nil)
+			//resp, err := a.client.Do(req)
 
-			output := &Output{ResponseCode: resp.StatusCode}
+			output := &Output{ResponseCode: 2020}
 			err = ctx.SetOutputObject(output)
 			if err != nil {
 				return true, err
