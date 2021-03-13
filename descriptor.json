@@ -15,7 +15,8 @@
     {
       "name": "processType",
       "type": "string",
-      "required": true
+      "required": true,
+      "allowed":["collections","locations","activities","processes"]
     },
     {
       "name": "getId",
@@ -36,8 +37,8 @@
   ],
   "output": [
     {
-      "name": "anOutput",
-      "type": "string"
+      "name": "responseCode",
+      "type": "number"
     }
   ]
 }

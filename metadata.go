@@ -44,17 +44,17 @@ func (r *Input) ToMap() map[string]interface{} {
 }
 
 type Output struct {
-	AnOutput string `md:"anOutput"`
+	ResponseCode int `md:"responseCode"`
 }
 
 func (o *Output) FromMap(values map[string]interface{}) error {
-	strVal, _ := coerce.ToString(values["anOutput"])
-	o.AnOutput = strVal
+	responseCodeVal, _ := coerce.ToInt(values["responseCode"])
+	o.ResponseCode = responseCodeVal
 	return nil
 }
 
 func (o *Output) ToMap() map[string]interface{} {
 	return map[string]interface{}{
-		"anOutput": o.AnOutput,
+		"responseCode": o.ResponseCode,
 	}
 }
