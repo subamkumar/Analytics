@@ -51,7 +51,7 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 	ctx.Logger().Debugf("Input: %d", input.LocationId)
 	ctx.Logger().Debugf("Input: %d", input.ActivityId)
 
-	output := &Output{AnOutput: 2020}
+	output := &Output{ResponseCode: 2020}
 	err = ctx.SetOutputObject(output)
 	if err != nil {
 		return true, err
