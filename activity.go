@@ -65,11 +65,11 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 
 		if input.ProcessType != "" {
 
-			if strings.LastIndex(urlString,"/") == len(urlString)-1 {
+			/*if strings.LastIndex(urlString,"/") == len(urlString)-1 {
 				urlString = urlString+input.ProcessType
 			}else{
 				urlString = urlString+"/"+input.ProcessType
-			}
+			}*/
 
 
 			if input.PathParamId != 0 {
