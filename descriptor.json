@@ -1,9 +1,9 @@
 {
-  "name": "sample-activity",
+  "name": "Plato-Analytics",
   "type": "flogo:activity",
   "version": "0.0.1",
-  "title": "Sample Activity",
-  "description": "Sample Activity",
+  "title": "Plato Analytics",
+  "description": "Plato Analytics",
   "settings": [
     {
       "name": "API_Base_URI",
