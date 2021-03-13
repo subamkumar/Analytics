@@ -5,6 +5,7 @@ import (
 	"github.com/project-flogo/core/data/metadata"
 	"net/http"
  	"net/url"
+	"strings"
 )
 
 func init() {
@@ -61,16 +62,44 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 
 		method := "GET"
 
-		req, _ := http.NewRequest(method, url.String(), nil)
-		resp, err := a.client.Do(req)
+		if input.ProcessType != "" {
 
-		output := &Output{ResponseCode: resp.StatusCode}
-		err = ctx.SetOutputObject(output)
-		if err != nil {
-			return true, err
+			if strings.LastIndex(urlString,"/") == len(urlString)-1 {
+				urlString = urlString+input.ProcessorType
+			}else{
+				urlString = urlString+"/"+input.ProcessorType
+			}
+
+
+			if input.getById != 0 {
+				urlString = urlString+"/"+string(input.getById)
+			}else{
+				if input.CollectionQueryId != 0 {
+					urlString = urlString+"?collection_id"+string(input.CollectionQueryId)
+				}
+
+				if input.ActivityQueryId != 0 {
+					urlString = urlString+"?activity_id"+string(input.ActivityQueryId)
+				}
+
+				if input.LocationQueryId != 0 {
+					urlString = urlString+"?location_id"+string(input.LocationQueryId)
+				}
+			}
+
+			ctx.Logger().Debugf("FORMED_URL: %s", url.String())
+
+			req, _ := http.NewRequest(method, url.String(), nil)
+			resp, err := a.client.Do(req)
+
+			output := &Output{ResponseCode: resp.StatusCode}
+			err = ctx.SetOutputObject(output)
+			if err != nil {
+				return true, err
+			}
+
+			return true, nil
 		}
-
-		return true, nil
 	}
 
 	return true, activity.NewError("API Gateway URL is not provided","",nil)
