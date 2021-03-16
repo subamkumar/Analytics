@@ -4,6 +4,8 @@ import (
 	"github.com/project-flogo/core/activity"
 	"github.com/project-flogo/core/data/metadata"
 	"net/http"
+	"bytes",
+	"encoding/json"
 )
 
 func init() {
@@ -139,11 +141,30 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 		return true, activity.NewError("Required Process Type is not provided","",nil)
 	}*/
 
+	body := make(map[string]interface{})
+
+	body["process_url"] = input.ProcessURL
+	body["processor_type"] = input.ProcessType
+	body["parameters"] = input.Parameters
+	body["logs"] = input.Log
+
+	jsonData,_ := json.Marshal(body)
+	byteData := bytes.NewBuffer(jsonData)
+
+	method = "POST"
+
+	req,_ := http.NewRequest(method,urlString,byteData)
+	resp,_ := a.client.Do(req)
+
+
 	//return true, activity.NewError("API Gateway URL is not provided","",nil)
 	ctx.Logger().Debugf("Input: %s", input.ProcessURL)
 	ctx.Logger().Debugf("Input: %s", input.ProcessType)
 	ctx.Logger().Debugf("Input: %s", input.Parameters)
 	ctx.Logger().Debugf("Input: %s", input.Log)
+
+	ctx.Logger().Debugf("Input: %d", resp.StatusCode)
+
 	//ctx.Logger().Debugf("Input: %d", input.ActivityId)
 	return true, nil
 }
