@@ -4,12 +4,6 @@ import (
 	"github.com/project-flogo/core/activity"
 	"github.com/project-flogo/core/data/metadata"
 	"net/http"
- 	"net/url"
-	"strconv"
-	"strings"
-	"encoding/json"
-	"io"
-	"io/ioutil"
 )
 
 func init() {
@@ -56,9 +50,9 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 		return true, err
 	}
 
-	urlString := a.settings.API_BASE_URL
-
-	if urlString!= "" {
+	urlString := a.settings.API_Gateway
+	ctx.Logger().Debugf("API_Gateway: %s", urlString)
+	/*if urlString!= "" {
 		_,err := url.Parse(urlString)
  		if err != nil {
  			return true, err
@@ -143,13 +137,13 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 			return true, nil
 		}
 		return true, activity.NewError("Required Process Type is not provided","",nil)
-	}
+	}*/
 
-	return true, activity.NewError("API Gateway URL is not provided","",nil)
-	//ctx.Logger().Debugf("Input: %s", input.ProcessType)
-	//ctx.Logger().Debugf("Input: %d", input.PathParamId)
-	//ctx.Logger().Debugf("Input: %d", input.CollectionId)
-	//ctx.Logger().Debugf("Input: %d", input.LocationId)
+	//return true, activity.NewError("API Gateway URL is not provided","",nil)
+	ctx.Logger().Debugf("Input: %s", input.ProcessURL)
+	ctx.Logger().Debugf("Input: %s", input.ProcessType)
+	ctx.Logger().Debugf("Input: %s", input.Parameters)
+	ctx.Logger().Debugf("Input: %s", input.Log)
 	//ctx.Logger().Debugf("Input: %d", input.ActivityId)
-
+	return true, nil
 }

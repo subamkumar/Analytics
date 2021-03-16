@@ -3,64 +3,48 @@ package sample
 import "github.com/project-flogo/core/data/coerce"
 
 type Settings struct {
-	API_BASE_URL string `md:"API_Base_URI,required"`
+	API_Gateway string `md:"API_Gateway,required"`
 }
 
 type Input struct {
-	ProcessType 	string	`md:"processType,required"`
-	PathParamId 	int		`md:"getId"`
-	CollectionId	int		`md:"filterByCollectionId"`
-	LocationId		int		`md:"filterByLocationId"`
-	ActivityId 		int		`md:"filterByActivityId"`
+	ProcessURL		string						`md:"process_url"`
+	ProcessType 	string						`md:"process_type"`
+	Parameters		map[string]interface{}		`md:"parameters"`
+	Log				map[string]interface{}		`md:"log"`
 }
 
 func (r *Input) FromMap(values map[string]interface{}) error {
-	processTypeVal, _ := coerce.ToString(values["processType"])
+	processURLVal, _ := coerce.ToString(values["process_url"])
+	r.ProcessURL = processURLVal
+
+	processTypeVal, _ := coerce.ToString(values["process_type"])
 	r.ProcessType = processTypeVal
 
-	pathParamIdVal, _ := coerce.ToInt(values["getId"])
-	r.PathParamId = pathParamIdVal
+	parametersVal, _ := coerce.ToObject(values["parameters"])
+	r.Parameters = parametersVal
 
-	collectionIdVal, _ := coerce.ToInt(values["filterByCollectionId"])
-	r.CollectionId = collectionIdVal
-
-	locationIdVal, _ := coerce.ToInt(values["filterByLocationId"])
-	r.LocationId = locationIdVal
-
-	activityIdVal, _ := coerce.ToInt(values["filterByActivityId"])
-	r.ActivityId = activityIdVal
+	logVal, _ := coerce.ToObject(values["log"])
+	r.Log = logVal
 
 	return nil
 }
 
 func (r *Input) ToMap() map[string]interface{} {
 	return map[string]interface{}{
-		"processType": r.ProcessType,
-		"getId": r.PathParamId,
-		"filterByCollectionId": r.CollectionId,
-		"filterByLocationId": r.LocationId,
-		"filterByActivityId": r.ActivityId,
+		"process_url": r.ProcessURL,
+		"process_type": r.ProcessType,
+		"parameters": r.Parameters,
+		"log": r.Log,
 	}
 }
 
 type Output struct {
-	ResponseCode int 			`md:"responseCode"`
-	ResponseData interface{} 	`md:"responseData"`
 }
 
 func (o *Output) FromMap(values map[string]interface{}) error {
-	responseCodeVal, _ := coerce.ToInt(values["responseCode"])
-	o.ResponseCode = responseCodeVal
-
-	responseDataVal, _ := coerce.ToInt(values["responseData"])
-	o.ResponseData = responseDataVal
-
 	return nil
 }
 
 func (o *Output) ToMap() map[string]interface{} {
-	return map[string]interface{}{
-		"responseCode": o.ResponseCode,
-		"responseData": o.ResponseData,
-	}
+	return map[string]interface{}
 }

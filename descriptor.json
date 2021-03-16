@@ -6,43 +6,28 @@
   "description": "Plato Analytics",
   "settings": [
     {
-      "name": "API_Base_URI",
+      "name": "API_Gateway",
       "type": "string",
       "required": true
     }
   ],
   "input": [
     {
-      "name": "processType",
-      "type": "string",
-      "required": true,
-      "allowed":["collections","locations","activities","processes"]
+      "name": "process_url",
+      "type": "string"
     },
     {
-      "name": "getId",
-      "type": "number"
+      "name": "process_type",
+      "type": "string"
     },
     {
-      "name": "filterByCollectionId",
-      "type": "number"
+      "name": "parameters",
+      "type": "object"
     },
     {
-      "name": "filterByLocationId",
-      "type": "number"
-    },
-    {
-      "name": "filterByActivityId",
-      "type": "number"
+      "name": "log",
+      "type": "object"
     }
   ],
-  "output": [
-    {
-      "name": "responseCode",
-      "type": "number"
-    },
-    {
-      "name": "responseData",
-      "type": "any"
-    }
-  ]
+  "output": []
 }
