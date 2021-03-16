@@ -151,7 +151,7 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 	jsonData,_ := json.Marshal(body)
 	byteData := bytes.NewBuffer(jsonData)
 
-	method = "POST"
+	method := "POST"
 
 	req,_ := http.NewRequest(method,urlString,byteData)
 	resp,_ := a.client.Do(req)
