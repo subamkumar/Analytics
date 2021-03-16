@@ -4,7 +4,7 @@ import (
 	"github.com/project-flogo/core/activity"
 	"github.com/project-flogo/core/data/metadata"
 	"net/http"
-	"bytes",
+	"bytes"
 	"encoding/json"
 )
 
