@@ -8,7 +8,8 @@
     {
       "name": "API_Gateway",
       "type": "string",
-      "required": true
+      "required": true,
+      "readonly": true
     }
   ],
   "input": [
