@@ -15,7 +15,8 @@
   "input": [
     {
       "name": "process_url",
-      "type": "string"
+      "type": "string",
+      "value": "testValue"
     },
     {
       "name": "process_type",
