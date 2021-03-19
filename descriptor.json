@@ -8,15 +8,15 @@
     {
       "name": "API_Gateway",
       "type": "string",
-      "required": true,
-      "readonly": true
+      "required": true
     }
   ],
   "input": [
     {
       "name": "process_url",
       "type": "string",
-      "value": "testValue"
+      "value": "testValue",
+      "visible": false
     },
     {
       "name": "process_type",
