@@ -16,7 +16,9 @@
       "name": "process_url",
       "type": "string",
       "value": "testValue",
-      "visible": false
+      "display": {
+        "visible": false
+      } 
     },
     {
       "name": "process_type",
