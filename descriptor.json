@@ -31,6 +31,10 @@
     {
       "name": "log",
       "type": "object"
+    },
+    {
+      "name":"testKey",
+      "type": "string"
     }
   ],
   "output": []

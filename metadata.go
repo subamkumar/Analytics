@@ -7,10 +7,11 @@ type Settings struct {
 }
 
 type Input struct {
-	ProcessURL		string						`md:"process_url"`
-	ProcessType 	string						`md:"process_type"`
-	Parameters		map[string]interface{}		`md:"parameters"`
-	Log				map[string]interface{}		`md:"log"`
+	ProcessURL  string                 `md:"process_url"`
+	ProcessType string                 `md:"process_type"`
+	Parameters  map[string]interface{} `md:"parameters"`
+	Log         map[string]interface{} `md:"log"`
+	TestKey     string                 `md:"testKey"`
 }
 
 func (r *Input) FromMap(values map[string]interface{}) error {
@@ -26,15 +27,19 @@ func (r *Input) FromMap(values map[string]interface{}) error {
 	logVal, _ := coerce.ToObject(values["log"])
 	r.Log = logVal
 
+	testKeyVal, _ := coerce.ToString(values["testKey"])
+	r.TestKey = testKeyVal
+
 	return nil
 }
 
 func (r *Input) ToMap() map[string]interface{} {
 	return map[string]interface{}{
-		"process_url": r.ProcessURL,
+		"process_url":  r.ProcessURL,
 		"process_type": r.ProcessType,
-		"parameters": r.Parameters,
-		"log": r.Log,
+		"parameters":   r.Parameters,
+		"log":          r.Log,
+		"testKey":      r.TestKey,
 	}
 }
 
