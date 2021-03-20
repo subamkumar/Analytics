@@ -18,10 +18,7 @@
     {
       "name": "process_url",
       "type": "string",
-      "value": "testValue",
-      "display": {
-        "visible": false
-      } 
+      "value": "testValue1"
     },
     {
       "name": "process_type",
