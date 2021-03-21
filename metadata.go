@@ -7,39 +7,49 @@ type Settings struct {
 }
 
 type Input struct {
-	ProcessURL  string                 `md:"process_url"`
-	ProcessType string                 `md:"process_type"`
-	Parameters  map[string]interface{} `md:"parameters"`
-	Log         map[string]interface{} `md:"log"`
-	TestKey     string                 `md:"testKey"`
+	Collection string `md:"collection,required"`
+	Location   string `md:"location,required"`
+	Activity   string `md:"activity,required"`
+	Username   string `md:"username"`
+	Password   string `md:"password"`
+	RequestId  string `md:"requestId"`
+	SecretId   string `md:"secretId"`
 }
 
 func (r *Input) FromMap(values map[string]interface{}) error {
-	processURLVal, _ := coerce.ToString(values["process_url"])
-	r.ProcessURL = processURLVal
+	collectionVal, _ := coerce.ToString(values["collection"])
+	r.Collection = collectionVal
 
-	processTypeVal, _ := coerce.ToString(values["process_type"])
-	r.ProcessType = processTypeVal
+	locationVal, _ := coerce.ToString(values["location"])
+	r.Location = locationVal
 
-	parametersVal, _ := coerce.ToObject(values["parameters"])
-	r.Parameters = parametersVal
+	activityVal, _ := coerce.ToString(values["activity"])
+	r.Activity = activityVal
 
-	logVal, _ := coerce.ToObject(values["log"])
-	r.Log = logVal
+	usernameVal, _ := coerce.ToString(values["username"])
+	r.Username = usernameVal
 
-	testKeyVal, _ := coerce.ToString(values["testKey"])
-	r.TestKey = testKeyVal
+	passwordVal, _ := coerce.ToString(values["password"])
+	r.Password = passwordVal
+
+	requestVal, _ := coerce.ToString(values["requestId"])
+	r.RequestId = requestVal
+
+	secretVal, _ := coerce.ToString(values["secretId"])
+	r.SecretId = secretVal
 
 	return nil
 }
 
 func (r *Input) ToMap() map[string]interface{} {
 	return map[string]interface{}{
-		"process_url":  r.ProcessURL,
-		"process_type": r.ProcessType,
-		"parameters":   r.Parameters,
-		"log":          r.Log,
-		"testKey":      r.TestKey,
+		"collection": r.Collection,
+		"location":   r.Location,
+		"activity":   r.Activity,
+		"username":   r.Username,
+		"password":   r.Password,
+		"requestId":  r.RequestId,
+		"secretId":   r.SecretId,
 	}
 }
 

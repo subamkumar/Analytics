@@ -144,10 +144,10 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 
 	body := make(map[string]interface{})
 
-	body["process_url"] = input.ProcessURL
-	body["processor_type"] = input.ProcessType
-	body["parameters"] = input.Parameters
-	body["logs"] = input.Log
+	body["collection"] = input.Collection
+	body["location"] = input.Location
+	body["activity"] = input.Activity
+	//body["username"] = input.Username
 
 	jsonData, _ := json.Marshal(body)
 	byteData := bytes.NewBuffer(jsonData)
@@ -158,11 +158,13 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 	resp, _ := a.client.Do(req)
 
 	//return true, activity.NewError("API Gateway URL is not provided","",nil)
-	ctx.Logger().Debugf("Input: %s", input.ProcessURL)
-	ctx.Logger().Debugf("Input: %s", input.ProcessType)
-	ctx.Logger().Debugf("Input: %s", input.Parameters)
-	ctx.Logger().Debugf("Input: %s", input.Log)
-	ctx.Logger().Debugf("Input: %s", input.TestKey)
+	ctx.Logger().Debugf("Input: %s", input.Collection)
+	ctx.Logger().Debugf("Input: %s", input.Location)
+	ctx.Logger().Debugf("Input: %s", input.Activity)
+	ctx.Logger().Debugf("Input: %s", input.Username)
+	ctx.Logger().Debugf("Input: %s", input.Password)
+	ctx.Logger().Debugf("Input: %s", input.RequestId)
+	ctx.Logger().Debugf("Input: %s", input.SecretId)
 
 	ctx.Logger().Debugf("Input: %d", resp.StatusCode)
 

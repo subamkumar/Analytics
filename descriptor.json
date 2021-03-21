@@ -8,33 +8,40 @@
     {
       "name": "API_Gateway",
       "type": "string",
-      "required": true,
-      "display": {
-        "visible": false
-      } 
+      "required": true
     }
   ],
   "input": [
     {
-      "name": "process_url",
+      "name": "secretId",
+      "type": "string"
+    },
+    {
+      "name": "requestId",
+      "type": "string"
+    },
+    {
+      "name": "password",
+      "type": "string"
+    },
+    {
+      "name": "username",
+      "type": "string"
+    },
+    {
+      "name": "activity",
       "type": "string",
-      "value": "testValue1"
+      "required": true
     },
     {
-      "name": "process_type",
-      "type": "string"
+      "name": "location",
+      "type": "string",
+      "required": true
     },
     {
-      "name": "parameters",
-      "type": "object"
-    },
-    {
-      "name": "log",
-      "type": "object"
-    },
-    {
-      "name":"testKey",
-      "type": "string"
+      "name":"collection",
+      "type": "string",
+      "required": true
     }
   ],
   "output": []
